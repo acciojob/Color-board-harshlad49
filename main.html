@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Color Board</title>
+  <title>Color Board - Random Colors</title>
   <style>
     .container {
       display: grid;
@@ -20,11 +20,6 @@
       transition: background-color 1s ease;
       cursor: pointer;
     }
-
-    .square.hovered {
-      background-color: #3498db;
-      transition: background-color 1s ease;
-    }
   </style>
 </head>
 <body>
@@ -34,25 +29,35 @@
   <script>
     const container = document.getElementById('container');
 
-    // Create 800 boxes
+    function getRandomColor() {
+      // Generates a random hex color like #a1b2c3
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
     for (let i = 0; i < 800; i++) {
       const box = document.createElement('div');
       box.classList.add('square');
 
-      // On mouse enter, add hovered class immediately
+      // Assign a random color to this box
+      const hoverColor = getRandomColor();
+
       box.addEventListener('mouseenter', () => {
-        // Clear any pending timeout to remove hover
+        // Clear any pending timeout
         if (box._timeoutId) {
           clearTimeout(box._timeoutId);
           box._timeoutId = null;
         }
-        box.classList.add('hovered');
+        box.style.backgroundColor = hoverColor;
       });
 
-      // On mouse leave, remove hovered class after 1 second (for smooth transition)
       box.addEventListener('mouseleave', () => {
         box._timeoutId = setTimeout(() => {
-          box.classList.remove('hovered');
+          box.style.backgroundColor = '#eee';
           box._timeoutId = null;
         }, 1000);
       });
