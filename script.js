@@ -1,22 +1,28 @@
-//your JS code here. If required.
-// This file is not to be modified. Please ignore this.
-// We will understand all of this later in the course.
-// DO NOT MODIFY THIS FILE
+const container = document.createElement('div');
+container.className = 'container';
+document.body.appendChild(container);
 
-const express = require('express');
-const path = require('path');
+const totalSquares = 800;
 
-const app = express();
+for (let i = 0; i < totalSquares; i++) {
+  const square = document.createElement('div');
+  square.className = 'square';
+  
+  square.addEventListener('mouseover', () => {
+    square.style.backgroundColor = getRandomColor(); // or fixed color
+    setTimeout(() => {
+      square.style.backgroundColor = 'rgb(29, 29, 29)';
+    }, 1000);
+  });
 
-app.use(express.static(__dirname))
+  container.appendChild(square);
+}
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/main.html'));
-});
-//your code here
-app.post('/add', (req, res) => {
-  const {a,b} = req.body;
-  res.status(200).send(a+b);
-  // res.sendFile(path.join(__dirname + '/main.html'));
-});
-module.exports = app;
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}

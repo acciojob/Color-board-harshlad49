@@ -1,1 +1,13 @@
 /*  your css code here. If applicable */
+.square {
+  width: 20px;
+  height: 20px;
+  background-color: rgb(29, 29, 29);
+  transition: background-color 1s ease;
+  display: inline-block;
+  margin: 1px;
+}
+
+.square.hovered {
+  background-color: yellow; /* or any color you want on hover */
+}

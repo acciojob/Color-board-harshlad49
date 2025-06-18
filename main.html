@@ -1,71 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Color Board - Random Colors</title>
-  <style>
-    .container {
-		background-color: black;
-      display: grid;
-      grid-template-columns: repeat(40, 20px);
-      grid-gap: 2px;
-      width: max-content;
-      margin: 20px auto;
-    }
-
-    .square {
-      width: 20px;
-      height: 20px;
-      background-color: #eee;
-      transition: background-color 1s ease;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container" id="container"></div>
-
-  <script>
-    const container = document.getElementById('container');
-
-    function getRandomColor() {
-      // Generates a random hex color like #a1b2c3
-      const letters = '0123456789ABCDEF';
-      let color = '#';
-      for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    }
-
-    for (let i = 0; i < 800; i++) {
-      const box = document.createElement('div');
-      box.classList.add('square');
-
-      // Assign a random color to this box
-      const hoverColor = getRandomColor();
-
-      box.addEventListener('mouseenter', () => {
-        // Clear any pending timeout
-        if (box._timeoutId) {
-          clearTimeout(box._timeoutId);
-          box._timeoutId = null;
-        }
-        box.style.backgroundColor = hoverColor;
-      });
-
-      box.addEventListener('mouseleave', () => {
-        box._timeoutId = setTimeout(() => {
-          box.style.backgroundColor = '#eee';
-          box._timeoutId = null;
-        }, 1000);
-      });
-
-      container.appendChild(box);
-    }
-  </script>
-
-</body>
+<html>
+  <head>
+    <title>Color Board</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="script.js"></script>
+  </body>
 </html>
